@@ -46,9 +46,9 @@ const SearchNotes = React.createClass({
 		) : '';
     return (
 			<div>
-      	<input type="text" ref="tag"></input>
-				<button onClick={this.handleSearch}>Search</button>
-				<Link to="/add">+</Link>
+      	<input type="text" ref="tag" className="search-form-input"></input>
+				<button className="search-form-btn" onClick={this.handleSearch}>Search</button>
+				<Link to="/add">[+]</Link>
 				<ul>
 					{list}
 				</ul>

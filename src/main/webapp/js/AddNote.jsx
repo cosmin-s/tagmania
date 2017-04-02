@@ -26,13 +26,13 @@ const AddNote = React.createClass({
     return (
 			<div>
         <div>
-      	   <textarea ref="content"></textarea>
+      	   <textarea ref="content" className="add-form-content"></textarea>
         </div>
         <div>
-          <input ref="tag" type="text"></input>
+          <input ref="tag" type="text" className="add-form-tag"></input>
         </div>
         <div>
-          <button onClick={this.handleSave}>Save</button>
+          <button className="add-form-btn" onClick={this.handleSave}>Save</button>
         </div>
 			</div>
     );

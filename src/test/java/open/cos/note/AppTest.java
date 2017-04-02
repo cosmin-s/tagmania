@@ -54,12 +54,17 @@ public class AppTest
 	
 	@Test
     public void testCreateNote(){
+	   
+	   String tag = "{\"name\": \"to-do-list\"}";
 	   String json = "{\"title\":\"to-do for work 1\","+
-		"\"content\": \"check mail from X to update the message translation\","+
-		"\"date\": \"2016-11-19\"}";
+				"\"content\": \"check mail from X to update the message translation\","+
+				"\"date\": \"2016-11-19\","+
+				"\"tags\": ["+ tag +"]"+
+				"}";
+	   
 	   RestAssured.given().body(json).contentType(ContentType.JSON).post("/note");
 	   
-       Response response = RestAssured.get("/note?tag=whatever").
+       Response response = RestAssured.get("/note?tag=to-do-list").
     	 then().contentType(ContentType.JSON).extract().response();
        Note[] notes = response.getBody().as(Note[].class);
        Assert.assertEquals(1, notes.length);

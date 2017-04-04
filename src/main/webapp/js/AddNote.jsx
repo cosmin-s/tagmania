@@ -56,6 +56,7 @@ const AddNote = React.createClass({
   render() {
     return (
 			<div>
+				<Link to="/">Home</Link>
         <div>
       	   <textarea ref="content" className="add-form-content"></textarea>
         </div>
@@ -64,6 +65,7 @@ const AddNote = React.createClass({
         </div>
         <div>
           <button className="add-form-btn" onClick={this.handleSave}>Save</button>
+					
         </div>
 			</div>
     );

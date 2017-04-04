@@ -8,6 +8,16 @@
     margin-bottom:5px;
 }
 
+.add-form-tag-item {
+    border:inset;
+    margin-right:5px;
+}
+
+.add-form-tag-list {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
 .add-form-btn {
     width:306px;
 }

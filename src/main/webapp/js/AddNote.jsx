@@ -2,17 +2,27 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 import Moment from 'moment';
+import TagList from 'tag/TagList';
 
 const AddNote = React.createClass({
 
+	getInitialState: function() {
+    return {
+      items: []
+    };
+  },
+
 	handleSave() {
+
+		const tagList = this.state.items.map((tag) => 
+			{return {name:tag.text};}
+		);
+
 		axios.post('/note',{
 			content:this.refs.content.value,
 			title:'test',
 			date: Moment().format('YYYY-MM-DD'),
-			tags:[{
-				name:this.refs.tag.value
-			}]
+			tags:tagList
 		})
 	  .then(function (response) {
 	    console.log(response);
@@ -22,6 +32,27 @@ const AddNote = React.createClass({
 	  });
 	},
 
+	handleAdd(item) {
+
+    var itemArray = this.state.items;
+   
+    itemArray.push(
+      {
+        text: item,
+        key: Date.now()
+      }
+    );
+ 
+    this.setState({
+      items: itemArray
+    });
+ 
+    //this.refs.item.value = "";
+ 
+    //e.preventDefault();
+		
+	},
+
   render() {
     return (
 			<div>
@@ -29,7 +60,7 @@ const AddNote = React.createClass({
       	   <textarea ref="content" className="add-form-content"></textarea>
         </div>
         <div>
-          <input ref="tag" type="text" className="add-form-tag"></input>
+        	<TagList handleAddItem={this.handleAdd} items={this.state.items}/>
         </div>
         <div>
           <button className="add-form-btn" onClick={this.handleSave}>Save</button>

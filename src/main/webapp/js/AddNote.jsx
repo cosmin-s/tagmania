@@ -8,7 +8,8 @@ const AddNote = React.createClass({
 
 	getInitialState: function() {
     return {
-      items: []
+      items: [],
+      noteItems:[]
     };
   },
 
@@ -17,9 +18,17 @@ const AddNote = React.createClass({
 		const tagList = this.state.items.map((tag) => 
 			{return {name:tag.text};}
 		);
+    const itemList = this.state.noteItems.map((noteItem) => 
+			{
+        return {
+            value:noteItem.text,
+            done:false
+          };
+        }
+		);
 
 		axios.post('/note',{
-			content:this.refs.content.value,
+			items:itemList,
 			title:'test',
 			date: Moment().format('YYYY-MM-DD'),
 			tags:tagList
@@ -53,19 +62,42 @@ const AddNote = React.createClass({
 		
 	},
 
+  handleAddNoteItem(noteItem){
+    var itemArray = this.state.noteItems;
+   
+    itemArray.push(
+      {
+        text: noteItem,
+        key: Date.now()
+      }
+    );
+ 
+    this.setState({
+      noteItems: itemArray
+    });
+  },
+
   render() {
     return (
 			<div>
 				<Link to="/">Home</Link>
-        <div>
-      	   <textarea ref="content" className="add-form-content"></textarea>
-        </div>
-        <div>
-        	<TagList handleAddItem={this.handleAdd} items={this.state.items}/>
-        </div>
-        <div>
-          <button className="add-form-btn" onClick={this.handleSave}>Save</button>
-					
+        <div className="add-form">
+          <div>
+            Note items
+          </div>
+          <div>
+            <TagList handleAddItem={this.handleAddNoteItem} items={this.state.noteItems}/> 
+          </div>
+          <div>
+            Tags
+          </div>  
+          <div>
+            <TagList handleAddItem={this.handleAdd} items={this.state.items}/>
+          </div>
+          <div>
+            <button className="add-form-btn" onClick={this.handleSave}>Save</button>
+            
+          </div>
         </div>
 			</div>
     );

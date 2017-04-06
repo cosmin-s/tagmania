@@ -1,5 +1,6 @@
 package open.cos.note.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,8 +28,10 @@ public class Note {
 	@Column(name="TITLE")
 	private String title;
 	
-	@Column(name="CONTENT")
-	private String content;
+	//@Column(name="CONTENT")
+	//private String content;
+	@OneToMany
+	private List<NoteItem> items = new ArrayList<>();
 	
 	@Column(name="DATE")
 	@Temporal(TemporalType.DATE)
@@ -48,13 +52,13 @@ public class Note {
 		this.title = title;
 	}
 
-	public String getContent() {
+	/*public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
-	}
+	}*/
 
 	public Date getDate() {
 		return date;
@@ -71,5 +75,14 @@ public class Note {
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
+
+	public List<NoteItem> getItems() {
+		return items;
+	}
+
+	public void addItem(NoteItem item) {
+		this.items.add(item);
+	}
+	
 
 }

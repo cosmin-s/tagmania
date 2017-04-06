@@ -1,3 +1,6 @@
+.add-form {
+    margin-top:10px;
+}
 .add-form-content{
     width:300px;
     height:350px;
@@ -6,6 +9,7 @@
 .add-form-tag{
     width:302px;
     margin-bottom:5px;
+    margin-right:5px;
 }
 
 .add-form-tag-item {

@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import open.cos.note.model.Note;
+import open.cos.note.model.NoteItem;
 import open.cos.note.model.Tag;
 
 @Repository
@@ -43,6 +44,11 @@ public class JpaNoteRepository {
 				}
 			}
 			note.setTags(newTags);
+			
+			for (NoteItem noteItem: note.getItems())
+			{
+				em.persist(noteItem);
+			}
 			em.persist(note);
 
 			em.getTransaction().commit();

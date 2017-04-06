@@ -42,7 +42,7 @@ const SearchNotes = React.createClass({
 
   render() {
 		const list = this.state.entity instanceof Array ? this.state.entity.map((note) => 
-			<li>{note.content}</li>
+			<li>{note.items.map(item=>item.value+"; ")}</li>
 		) : '';
     return (
 			<div>
